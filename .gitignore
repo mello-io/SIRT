@@ -13,8 +13,11 @@
 /.next/
 /out/
 
-# production
-/build
+# production (Next.js outputs to .next/, not /build)
+
+# S.I.R.T. source docs
+/build/
+
 
 # misc
 .DS_Store
@@ -34,3 +37,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code local settings
+.claude/
