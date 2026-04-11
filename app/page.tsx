@@ -1,101 +1,129 @@
-import Image from "next/image";
+// S.I.R.T. — Screen 01: Landing
+// Product name, tagline, two primary CTAs, footer.
 
-export default function Home() {
+import Link from "next/link";
+import { ArrowRight, Terminal, ExternalLink } from "lucide-react";
+import { AppShell } from "@/components/sirt/AppShell";
+import { Button } from "@/components/ui/button";
+
+export default function LandingPage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <AppShell>
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-16 text-center relative">
+        {/* Hero block */}
+        <div className="max-w-xl w-full">
+          <div className="mb-8">
+            <span className="inline-block text-[11px] font-mono text-muted-ash border border-grid-line rounded px-2.5 py-1 uppercase tracking-widest">
+              Security Incident Response Transcript
+            </span>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <h1 className="font-mono font-bold text-5xl text-off-white mb-4 tracking-tight leading-none">
+            S.I.R.T.
+          </h1>
+
+          <p className="font-mono text-lg text-signal-green mb-3 tracking-tight">
+            SOAR for humans.
+          </p>
+
+          <p className="text-muted-ash text-sm leading-relaxed mb-10 max-w-md mx-auto">
+            Comprehensive IR checklists tailored to your exact security stack.
+            Stack-aware. MITRE-tagged. Analyst-ready.
+          </p>
+
+          {/* Primary CTAs */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/setup">
+              <Button className="bg-signal-green text-void hover:bg-signal-green/90 font-mono font-semibold text-sm px-6 h-11 w-full sm:w-auto">
+                Set Up Org Stack
+                <ArrowRight size={15} className="ml-2" />
+              </Button>
+            </Link>
+
+            <Link href="/session">
+              <Button
+                variant="outline"
+                className="border-grid-line bg-transparent text-off-white hover:bg-deep-slate font-mono text-sm px-6 h-11 w-full sm:w-auto"
+              >
+                Start Incident Session
+                <Terminal size={15} className="ml-2" />
+              </Button>
+            </Link>
+          </div>
+
+          {/* Quick-start hint */}
+          <p className="mt-5 text-xs text-muted-ash font-mono">
+            Already have an{" "}
+            <code className="text-off-white bg-iron px-1 py-0.5 rounded text-[11px]">
+              org-sec-stack.md
+            </code>
+            ?{" "}
+            <Link
+              href="/session"
+              className="text-intel-blue hover:underline underline-offset-2"
+            >
+              Load it directly →
+            </Link>
+          </p>
+        </div>
+
+        {/* How it works */}
+        <div className="mt-20 max-w-2xl w-full">
+          <p className="text-[11px] font-mono text-muted-ash uppercase tracking-widest mb-6">
+            How it works
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              {
+                step: "01",
+                title: "Set up your stack",
+                body: "Select your security tools from 60+ options across 9 categories.",
+              },
+              {
+                step: "02",
+                title: "Select incident type",
+                body: "Choose from 22 incident sub-types across 7 categories with MITRE tags.",
+              },
+              {
+                step: "03",
+                title: "Download checklist",
+                body: "Get a phase-structured, tool-specific IR checklist as a portable .md file.",
+              },
+            ].map(({ step, title, body }) => (
+              <div
+                key={step}
+                className="bg-deep-slate border border-grid-line rounded p-4 text-left"
+              >
+                <span className="font-mono text-[11px] text-signal-green mb-2 block">
+                  {step}
+                </span>
+                <p className="font-mono text-sm text-off-white font-semibold mb-1">
+                  {title}
+                </p>
+                <p className="text-xs text-muted-ash leading-relaxed">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-grid-line px-6 py-4 flex items-center justify-between text-[11px] font-mono text-muted-ash">
+        <span>S.I.R.T. v1.0</span>
+        <div className="flex items-center gap-4">
+          <span className="hidden sm:inline">⌘D — download checklist</span>
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://github.com/mello-io/SIRT"
             target="_blank"
             rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-off-white transition-colors"
+            aria-label="GitHub repository"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+            <ExternalLink size={13} />
+            GitHub
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
       </footer>
-    </div>
+    </AppShell>
   );
 }

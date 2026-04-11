@@ -1,14 +1,21 @@
 // S.I.R.T. — /api/provider
-// Provider normaliser: maps a unified LLMRequest to each provider's API schema.
-// Called internally by /api/generate — not invoked directly by the frontend.
-// Phase 0: stub — interface defined in lib/types/llm.ts, implementation deferred to Phase 1.
+// Exposes the provider normaliser status. The actual callProvider() function
+// lives in lib/api/provider.ts and is imported directly by /api/generate.
+// This route exists for health-check and discoverability purposes.
 
 import { NextResponse } from "next/server";
+import { TOOL_LIBRARY } from "@/lib/constants/tool-library";
 
 export async function GET() {
   return NextResponse.json({
-    status: "stub",
-    message:
-      "Provider normaliser not yet implemented. Interface defined in lib/types/llm.ts.",
+    status: "ok",
+    providers: ["anthropic", "openai", "google", "mistral"],
+    models: {
+      anthropic: "claude-sonnet-4-6",
+      openai: "gpt-4o",
+      google: "gemini-1.5-pro",
+      mistral: "mistral-large-latest",
+    },
+    toolLibraryCount: TOOL_LIBRARY.length,
   });
 }
