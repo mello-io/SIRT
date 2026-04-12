@@ -459,8 +459,8 @@ export default function SessionPage() {
                 ))}
               </div>
 
-              {/* Sub-type selector */}
-              {selectedCategory && (
+              {/* Sub-type selector — or empty state hint */}
+              {selectedCategory ? (
                 <div className="bg-deep-slate border border-grid-line rounded p-4">
                   <SubTypeSelector
                     category={selectedCategory}
@@ -468,6 +468,10 @@ export default function SessionPage() {
                     onSelect={setSelectedSubTypeId}
                   />
                 </div>
+              ) : (
+                <p className="text-xs font-mono text-muted-ash text-center py-3 border border-dashed border-grid-line rounded">
+                  Select a category above to see incident sub-types.
+                </p>
               )}
             </section>
 

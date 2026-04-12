@@ -240,6 +240,22 @@ export default function OutputPage() {
     }
   }, [router]);
 
+  // ⌘/Ctrl + D — download shortcut
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === "d") {
+        e.preventDefault();
+        if (!output) return;
+        downloadMarkdown(
+          output.content,
+          buildOutputFilename(output.meta.incidentSubType)
+        );
+      }
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [output]);
+
   // Error state — bad sessionStorage data
   if (loadError) {
     return (
@@ -387,6 +403,9 @@ export default function OutputPage() {
               >
                 <Download size={12} className="mr-2" aria-hidden="true" />
                 Download .md
+                <span className="ml-auto text-[10px] opacity-60 font-normal hidden sm:inline">
+                  ⌘D
+                </span>
               </Button>
 
               <Button
@@ -464,6 +483,21 @@ export default function OutputPage() {
                 {output.content}
               </ReactMarkdown>
             )}
+
+            {/* MITRE ATT&CK attribution — required for public ATT&CK usage */}
+            <p className="mt-10 pt-4 border-t border-grid-line text-[10px] font-mono text-muted-ash/50 leading-relaxed">
+              MITRE ATT&amp;CK® is a registered trademark of The MITRE
+              Corporation. Technique references link to{" "}
+              <a
+                href="https://attack.mitre.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-muted-ash transition-colors underline underline-offset-2"
+              >
+                attack.mitre.org
+              </a>
+              .
+            </p>
           </div>
         </main>
       </div>

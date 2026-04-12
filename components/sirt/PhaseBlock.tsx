@@ -27,7 +27,7 @@ export function PhaseBlock({
         type="button"
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center gap-2 py-2.5 border-b border-grid-line text-left group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal-green rounded-sm"
-        aria-expanded={open}
+        aria-expanded={open ? "true" : "false"}
       >
         {open ? (
           <ChevronDown
@@ -47,7 +47,16 @@ export function PhaseBlock({
         </span>
       </button>
 
-      {open && <div className="pt-4">{children}</div>}
+      {/* CSS grid trick for smooth height transition without JS measurement */}
+      <div
+        className={`grid transition-all duration-200 ease-out ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="pt-4">{children}</div>
+        </div>
+      </div>
     </div>
   );
 }
