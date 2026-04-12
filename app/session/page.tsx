@@ -14,7 +14,6 @@ import {
   Key,
   Eye,
   EyeOff,
-  Loader2,
   AlertTriangle,
   CheckCircle,
 } from "lucide-react";
@@ -24,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { IncidentTypeCard } from "@/components/sirt/IncidentTypeCard";
 import { SubTypeSelector } from "@/components/sirt/SubTypeSelector";
 import { AssetTypeDropdown } from "@/components/sirt/AssetTypeDropdown";
+import { ProgressTerminal } from "@/components/sirt/ProgressTerminal";
 import { INCIDENT_CATEGORIES } from "@/lib/constants/incident-types";
 import { ASSET_TYPES } from "@/lib/constants/asset-types";
 import { parseOrgStack, stackToolCount } from "@/lib/utils/stack-parser";
@@ -414,8 +414,18 @@ export default function SessionPage() {
           </div>
         )}
 
+        {/* ── Generating: ProgressTerminal overlay ─────────────────────── */}
+        {step === 2 && isGenerating && (
+          <div className="py-8">
+            <p className="text-xs font-mono text-muted-ash mb-5 text-center">
+              Building your incident response checklist...
+            </p>
+            <ProgressTerminal />
+          </div>
+        )}
+
         {/* ── Step 2: Incident Configuration ───────────────────────────── */}
-        {step === 2 && (
+        {step === 2 && !isGenerating && (
           <div className="space-y-8">
             <div>
               <h1 className="font-mono font-bold text-2xl text-off-white mb-1">
@@ -627,21 +637,8 @@ export default function SessionPage() {
                 disabled={!canGenerate || isGenerating}
                 className="bg-signal-green text-void hover:bg-signal-green/90 font-mono font-semibold text-sm px-6 h-9 disabled:opacity-40 min-w-[180px]"
               >
-                {isGenerating ? (
-                  <>
-                    <Loader2
-                      size={14}
-                      className="mr-2 animate-spin"
-                      aria-hidden="true"
-                    />
-                    Generating...
-                  </>
-                ) : (
-                  <>
-                    <FileText size={14} className="mr-2" aria-hidden="true" />
-                    Generate Checklist
-                  </>
-                )}
+                <FileText size={14} className="mr-2" aria-hidden="true" />
+                Generate Checklist
               </Button>
             </div>
 

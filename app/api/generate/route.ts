@@ -81,8 +81,17 @@ export async function POST(request: NextRequest) {
       maxTokens: MAX_TOKENS,
     });
 
+    // ── Sanitise response ────────────────────────────────────────────────────
+    const sanitised = result.content.trim();
+    if (!sanitised || sanitised.length < 100) {
+      return NextResponse.json(
+        { error: "LLM returned an empty or incomplete response. Please retry." },
+        { status: 502 }
+      );
+    }
+
     return NextResponse.json({
-      content: result.content,
+      content: sanitised,
       provider: result.provider,
       tokensUsed: result.tokensUsed,
     });
