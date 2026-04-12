@@ -17,6 +17,10 @@ import { callProvider } from "@/lib/api/provider";
 import { SYSTEM_PROMPT } from "@/lib/prompts/system-prompt";
 import type { Provider } from "@/lib/types/llm";
 
+// Vercel function timeout — LLM responses at 8000 max tokens can take 30–50s.
+// Without this, Vercel free tier cuts the function at 10s.
+export const maxDuration = 60;
+
 const VALID_PROVIDERS: Provider[] = ["anthropic", "openai", "google", "mistral"];
 const MAX_PAYLOAD_BYTES = 50_000;
 const MAX_TOKENS = 8000;

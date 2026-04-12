@@ -1,6 +1,7 @@
 // S.I.R.T. Provider Normaliser
 // Maps a unified LLMRequest to each provider's API schema and returns a normalised LLMResponse.
-// Called by /api/generate — never invoked directly from the frontend.
+// In Vercel mode: called server-side by /api/generate (API key stays server-side).
+// In static mode: called directly from the browser (BYOK key is transmitted in the request header).
 //
 // Provider map (TECH_STACK.md Section 4):
 //   anthropic → claude-sonnet-4-6    → api.anthropic.com/v1/messages
