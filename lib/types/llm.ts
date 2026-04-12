@@ -13,6 +13,6 @@ export interface LLMRequest {
 
 export interface LLMResponse {
   content: string;
-  provider: string;
+  provider: Provider;
   tokensUsed: number;
 }
