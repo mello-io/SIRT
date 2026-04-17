@@ -2,7 +2,7 @@
 // Top nav bar present on all screens. Server component — no client interactivity.
 
 import Link from "next/link";
-import { Settings } from "lucide-react";
+import { Settings, FileText } from "lucide-react";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -29,13 +29,23 @@ export function AppShell({ children }: AppShellProps) {
           </span>
         </Link>
 
-        <Link
-          href="/settings"
-          className="text-muted-ash hover:text-off-white transition-colors p-1 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal-green"
-          aria-label="Settings"
-        >
-          <Settings size={18} aria-hidden="true" />
-        </Link>
+        <div className="flex items-center gap-1">
+          <Link
+            href="/incident"
+            className="flex items-center gap-1.5 text-[11px] font-mono text-muted-ash hover:text-off-white transition-colors px-2 py-1 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal-green"
+            aria-label="Incident Type Generator"
+          >
+            <FileText size={13} aria-hidden="true" />
+            <span className="hidden sm:inline">Generate File</span>
+          </Link>
+          <Link
+            href="/settings"
+            className="text-muted-ash hover:text-off-white transition-colors p-1 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal-green"
+            aria-label="Settings"
+          >
+            <Settings size={18} aria-hidden="true" />
+          </Link>
+        </div>
       </nav>
 
       {/* Page content */}

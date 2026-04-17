@@ -2,7 +2,7 @@
 // Product name, tagline, two primary CTAs, footer.
 
 import Link from "next/link";
-import { ArrowRight, Terminal, ExternalLink } from "lucide-react";
+import { ArrowRight, Terminal, ExternalLink, FileText } from "lucide-react";
 import { AppShell } from "@/components/sirt/AppShell";
 import { Button } from "@/components/ui/button";
 
@@ -51,8 +51,21 @@ export default function LandingPage() {
             </Link>
           </div>
 
+          {/* Skill bundle path */}
+          <div className="mt-5">
+            <Link href="/incident">
+              <Button
+                variant="ghost"
+                className="text-muted-ash hover:text-off-white font-mono text-xs h-9 px-4 w-full sm:w-auto border border-grid-line/50 hover:border-grid-line hover:bg-deep-slate"
+              >
+                <FileText size={13} className="mr-1.5" />
+                No API key? Generate Incident File for Claude Skill
+              </Button>
+            </Link>
+          </div>
+
           {/* Quick-start hint */}
-          <p className="mt-5 text-xs text-muted-ash font-mono">
+          <p className="mt-4 text-xs text-muted-ash font-mono">
             Already have an{" "}
             <code className="text-off-white bg-iron px-1 py-0.5 rounded text-[11px]">
               org-sec-stack.md
