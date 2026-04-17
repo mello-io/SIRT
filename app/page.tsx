@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Terminal, ExternalLink } from "lucide-react";
+import { SkillBundleCTA } from "@/components/sirt/SkillBundleCTA";
 import { AppShell } from "@/components/sirt/AppShell";
 import { Button } from "@/components/ui/button";
 
@@ -51,8 +52,13 @@ export default function LandingPage() {
             </Link>
           </div>
 
+          {/* Skill bundle path */}
+          <div className="mt-6 max-w-sm mx-auto w-full">
+            <SkillBundleCTA variant="card" />
+          </div>
+
           {/* Quick-start hint */}
-          <p className="mt-5 text-xs text-muted-ash font-mono">
+          <p className="mt-4 text-xs text-muted-ash font-mono">
             Already have an{" "}
             <code className="text-off-white bg-iron px-1 py-0.5 rounded text-[11px]">
               org-sec-stack.md
@@ -109,7 +115,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-grid-line px-6 py-4 flex items-center justify-between text-[11px] font-mono text-muted-ash">
-        <span>S.I.R.T. v1.0</span>
+        <span>S.I.R.T. v1.1</span>
         <div className="flex items-center gap-4">
           <span className="hidden sm:inline">⌘D — download checklist</span>
           <a

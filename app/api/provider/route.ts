@@ -7,15 +7,18 @@ import { NextResponse } from "next/server";
 import { TOOL_LIBRARY } from "@/lib/constants/tool-library";
 
 export async function GET() {
-  return NextResponse.json({
-    status: "ok",
-    providers: ["anthropic", "openai", "google", "mistral"],
-    models: {
-      anthropic: "claude-sonnet-4-6",
-      openai: "gpt-4o",
-      google: "gemini-1.5-pro",
-      mistral: "mistral-large-latest",
+  return NextResponse.json(
+    {
+      status: "ok",
+      providers: ["anthropic", "openai", "google", "mistral"],
+      models: {
+        anthropic: "claude-sonnet-4-6",
+        openai: "gpt-4o",
+        google: "gemini-1.5-pro",
+        mistral: "mistral-large-latest",
+      },
+      toolLibraryCount: TOOL_LIBRARY.length,
     },
-    toolLibraryCount: TOOL_LIBRARY.length,
-  });
+    { headers: { "X-SIRT-Version": "1.1" } }
+  );
 }

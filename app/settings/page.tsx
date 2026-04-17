@@ -7,7 +7,9 @@ import { useState } from "react";
 import { ExternalLink, Trash2, CheckCircle } from "lucide-react";
 import { AppShell } from "@/components/sirt/AppShell";
 import { Button } from "@/components/ui/button";
+import { SkillBundleCTA } from "@/components/sirt/SkillBundleCTA";
 import { DEPLOY_MODE } from "@/lib/config";
+import { SIRT_API_KEY, SIRT_PROVIDER_KEY } from "@/lib/types/session";
 import type { Provider } from "@/lib/types/llm";
 
 const PROVIDER_LABELS: Record<Provider, string> = {
@@ -21,8 +23,8 @@ export default function SettingsPage() {
   const [cleared, setCleared] = useState(false);
 
   function clearApiKey() {
-    sessionStorage.removeItem("sirt_api_key");
-    sessionStorage.removeItem("sirt_provider");
+    sessionStorage.removeItem(SIRT_API_KEY);
+    sessionStorage.removeItem(SIRT_PROVIDER_KEY);
     setCleared(true);
     setTimeout(() => setCleared(false), 3000);
   }
@@ -121,6 +123,27 @@ export default function SettingsPage() {
             </Button>
           </section>
 
+          {/* Skill bundle */}
+          <section className="bg-deep-slate border border-grid-line rounded p-5">
+            <h2 className="font-mono text-sm font-semibold text-off-white mb-4">
+              Skill Bundle
+            </h2>
+            <SkillBundleCTA variant="inline" />
+          </section>
+
+          {/* Privacy */}
+          <section className="bg-deep-slate border border-grid-line rounded p-5">
+            <h2 className="font-mono text-sm font-semibold text-off-white mb-3">
+              Analytics & Privacy
+            </h2>
+            <p className="text-xs text-muted-ash leading-relaxed">
+              S.I.R.T. uses Vercel Analytics for anonymous page visit tracking
+              and web vitals. No personal data, API keys, incident content, or
+              stack details are ever collected. Analytics are disabled in static
+              mode.
+            </p>
+          </section>
+
           {/* About */}
           <section className="bg-deep-slate border border-grid-line rounded p-5">
             <h2 className="font-mono text-sm font-semibold text-off-white mb-3">
@@ -129,7 +152,7 @@ export default function SettingsPage() {
             <dl className="space-y-2 text-xs font-mono">
               {[
                 ["Product", "S.I.R.T. — Security Incident Response Transcript"],
-                ["Version", "v1.0"],
+                ["Version", "v1.1"],
                 ["Incident types", "22 across 7 categories"],
                 ["Tool library", "60+ tools across 9 categories"],
               ].map(([label, value]) => (

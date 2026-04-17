@@ -76,6 +76,8 @@ export async function POST(request: NextRequest) {
   }
 
   // ── Dispatch to provider ───────────────────────────────────────────────────
+  const headers = { "X-SIRT-Version": "1.1" };
+
   try {
     const result = await callProvider({
       provider: provider as Provider,
@@ -88,29 +90,32 @@ export async function POST(request: NextRequest) {
     // ── Sanitise response ────────────────────────────────────────────────────
     const sanitised = result.content.trim();
     if (!sanitised || sanitised.length < 100) {
+      console.error("[SIRT] generate: empty response", { provider, incidentTypeId, assetTypeId });
       return NextResponse.json(
         { error: "LLM returned an empty or incomplete response. Please retry." },
-        { status: 502 }
+        { status: 502, headers }
       );
     }
 
-    return NextResponse.json({
-      content: sanitised,
-      provider: result.provider,
-      tokensUsed: result.tokensUsed,
-    });
+    return NextResponse.json(
+      { content: sanitised, provider: result.provider, tokensUsed: result.tokensUsed },
+      { headers }
+    );
   } catch (err) {
     const message = err instanceof Error ? err.message : "LLM request failed";
+    console.error("[SIRT] generate error", {
+      provider,
+      errorType: err instanceof Error ? err.name : "unknown",
+      status: (err as Record<string, unknown>)?.status ?? null,
+    });
 
-    // Surface rate limit errors distinctly
     if (message.includes("429") || message.toLowerCase().includes("rate limit")) {
       return NextResponse.json(
         { error: "Rate limit reached. Wait a moment and try again.", code: "RATE_LIMIT" },
-        { status: 429 }
+        { status: 429, headers }
       );
     }
 
-    // Surface auth errors distinctly
     if (
       message.includes("401") ||
       message.includes("403") ||
@@ -119,10 +124,10 @@ export async function POST(request: NextRequest) {
     ) {
       return NextResponse.json(
         { error: "Invalid API key. Check your key and try again.", code: "AUTH_ERROR" },
-        { status: 401 }
+        { status: 401, headers }
       );
     }
 
-    return NextResponse.json({ error: message }, { status: 502 });
+    return NextResponse.json({ error: message }, { status: 502, headers });
   }
 }
