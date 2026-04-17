@@ -17,6 +17,8 @@ import { NextRequest, NextResponse } from "next/server";
 const FETCH_TIMEOUT_MS = 10_000;
 const MAX_CONTENT_LENGTH = 50_000; // chars
 
+const HEADERS = { "X-SIRT-Version": "1.1" };
+
 export async function POST(request: NextRequest) {
   let docsUrl: string;
 
@@ -24,11 +26,11 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     docsUrl = body?.docsUrl;
   } catch {
-    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400, headers: HEADERS });
   }
 
   if (!docsUrl || typeof docsUrl !== "string") {
-    return NextResponse.json({ error: "Missing docsUrl" }, { status: 400 });
+    return NextResponse.json({ error: "Missing docsUrl" }, { status: 400, headers: HEADERS });
   }
 
   // Validate URL
@@ -38,11 +40,11 @@ export async function POST(request: NextRequest) {
     if (!["http:", "https:"].includes(parsedUrl.protocol)) {
       return NextResponse.json(
         { error: "Only http/https URLs are supported" },
-        { status: 400 }
+        { status: 400, headers: HEADERS }
       );
     }
   } catch {
-    return NextResponse.json({ error: "Invalid URL" }, { status: 400 });
+    return NextResponse.json({ error: "Invalid URL" }, { status: 400, headers: HEADERS });
   }
 
   // Fetch with timeout
@@ -61,9 +63,10 @@ export async function POST(request: NextRequest) {
     clearTimeout(timer);
 
     if (!response.ok) {
+      console.error("[SIRT] fetch-docs: upstream error", { status: response.status, source: parsedUrl.hostname });
       return NextResponse.json(
         { error: `Upstream returned ${response.status}` },
-        { status: 502 }
+        { status: 502, headers: HEADERS }
       );
     }
 
@@ -76,13 +79,12 @@ export async function POST(request: NextRequest) {
     if (!isText) {
       return NextResponse.json(
         { error: `Non-text content type: ${contentType}` },
-        { status: 422 }
+        { status: 422, headers: HEADERS }
       );
     }
 
     const raw = await response.text();
 
-    // Basic HTML stripping — remove scripts, styles, then all tags
     const cleaned = raw
       .replace(/<script[\s\S]*?<\/script>/gi, " ")
       .replace(/<style[\s\S]*?<\/style>/gi, " ")
@@ -92,24 +94,25 @@ export async function POST(request: NextRequest) {
       .trim()
       .slice(0, MAX_CONTENT_LENGTH);
 
-    return NextResponse.json({
-      content: cleaned,
-      source: parsedUrl.hostname,
-      charCount: cleaned.length,
-    });
+    return NextResponse.json(
+      { content: cleaned, source: parsedUrl.hostname, charCount: cleaned.length },
+      { headers: HEADERS }
+    );
   } catch (err) {
     clearTimeout(timer);
 
     if (err instanceof Error && err.name === "AbortError") {
+      console.error("[SIRT] fetch-docs: timeout", { source: parsedUrl.hostname });
       return NextResponse.json(
         { error: "Request timed out after 10s" },
-        { status: 504 }
+        { status: 504, headers: HEADERS }
       );
     }
 
+    console.error("[SIRT] fetch-docs error", { errorType: err instanceof Error ? err.name : "unknown" });
     return NextResponse.json(
       { error: "Failed to fetch documentation" },
-      { status: 502 }
+      { status: 502, headers: HEADERS }
     );
   }
 }
