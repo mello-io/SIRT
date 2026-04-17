@@ -3,8 +3,6 @@
 > SOAR for humans. Comprehensive IR checklists, tailored to your exact security stack.
 
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/mello-io/SIRT&env=NEXT_PUBLIC_DEPLOY_MODE&envDescription=Set%20to%20vercel%20for%20production&project-name=sirt&repository-name=SIRT)
-
 **Live:** [sirt-five.vercel.app](https://sirt-five.vercel.app/)
 
 ---
