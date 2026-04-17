@@ -7,6 +7,7 @@ import { useState } from "react";
 import { ExternalLink, Trash2, CheckCircle } from "lucide-react";
 import { AppShell } from "@/components/sirt/AppShell";
 import { Button } from "@/components/ui/button";
+import { SkillBundleCTA } from "@/components/sirt/SkillBundleCTA";
 import { DEPLOY_MODE } from "@/lib/config";
 import type { Provider } from "@/lib/types/llm";
 
@@ -119,6 +120,14 @@ export default function SettingsPage() {
                 </>
               )}
             </Button>
+          </section>
+
+          {/* Skill bundle */}
+          <section className="bg-deep-slate border border-grid-line rounded p-5">
+            <h2 className="font-mono text-sm font-semibold text-off-white mb-4">
+              Skill Bundle
+            </h2>
+            <SkillBundleCTA variant="inline" />
           </section>
 
           {/* About */}

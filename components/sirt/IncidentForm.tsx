@@ -80,29 +80,23 @@ export function IncidentForm({ onFormChange }: IncidentFormProps) {
     const now = new Date();
     const dateStr = now.toISOString().slice(0, 10);
 
+    const mitreList = state.mitreTags.map((t) => `  - ${t}`).join("\n");
     const lines: string[] = [
       `# incident-type.md`,
-      `> Generated: ${now.toISOString().slice(0, 16).replace("T", " ")}`,
-      `> S.I.R.T. Version: v1.1`,
+      `# Generated: ${now.toISOString().slice(0, 16).replace("T", " ")} | S.I.R.T. v1.1`,
       ``,
-      `## Incident`,
-      ``,
-      `- **Category:** ${category?.icon} ${category?.name}`,
-      `- **Sub-type:** ${subType?.id} — ${subType?.name}`,
-      `- **Asset Type:** ${assetType?.name}${assetType?.description ? ` — ${assetType.description}` : ""}`,
-      ...(state.severity ? [`- **Severity:** ${state.severity}`] : []),
-      ...(state.detectionTime
-        ? [`- **Detection Time:** ${state.detectionTime.replace("T", " ")}`]
-        : []),
-      ``,
-      `## MITRE ATT&CK`,
-      ``,
-      ...state.mitreTags.map((t) => `- ${t}`),
-      ``,
+      `incident_type: "${category?.name}"`,
+      `sub_type: "${subType?.name}"`,
+      `sub_type_id: "${subType?.id}"`,
+      `asset_type: "${assetType?.name}${assetType?.description ? ` — ${assetType.description}` : ""}"`,
+      `severity_tag: "${state.severity ?? ""}"`,
+      `detection_time: "${state.detectionTime ? state.detectionTime.replace("T", " ") : ""}"`,
+      `mitre_primary:`,
+      mitreList,
     ];
 
     if (state.analystNotes.trim()) {
-      lines.push(`## Analyst Notes`, ``, state.analystNotes.trim(), ``);
+      lines.push(`analyst_notes: >`, `  ${state.analystNotes.trim().replace(/\n/g, "\n  ")}`);
     }
 
     const slug =

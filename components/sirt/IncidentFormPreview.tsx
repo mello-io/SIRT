@@ -13,29 +13,26 @@ export function IncidentFormPreview({ state }: IncidentFormPreviewProps) {
   const category = state.categoryId ? getIncidentCategory(state.categoryId) : null;
   const assetType = ASSET_TYPES.find((a) => a.id === state.assetTypeId);
 
+  const mitreList = state.mitreTags.length
+    ? state.mitreTags.map((t) => `  - ${t}`).join("\n")
+    : `  - (auto-populated on sub-type select)`;
+
   const lines: string[] = [
     `# incident-type.md`,
-    `> Generated: [on download]`,
-    `> S.I.R.T. Version: v1.1`,
+    `# Generated: [on download] | S.I.R.T. v1.1`,
     ``,
-    `## Incident`,
-    ``,
-    `- **Category:** ${category ? `${category.icon} ${category.name}` : "—"}`,
-    `- **Sub-type:** ${subType ? `${subType.id} — ${subType.name}` : "—"}`,
-    `- **Asset Type:** ${assetType ? `${assetType.name} — ${assetType.description}` : "—"}`,
-    `- **Severity:** ${state.severity ?? "—"}`,
-    `- **Detection Time:** ${state.detectionTime ? state.detectionTime.replace("T", " ") : "—"}`,
-    ``,
-    `## MITRE ATT&CK`,
-    ``,
-    ...(state.mitreTags.length
-      ? state.mitreTags.map((t) => `- ${t}`)
-      : [`— (auto-populated on sub-type select)`]),
-    ``,
+    `incident_type: "${category?.name ?? "—"}"`,
+    `sub_type: "${subType?.name ?? "—"}"`,
+    `sub_type_id: "${subType?.id ?? "—"}"`,
+    `asset_type: "${assetType ? `${assetType.name} — ${assetType.description}` : "—"}"`,
+    `severity_tag: "${state.severity ?? ""}"`,
+    `detection_time: "${state.detectionTime ? state.detectionTime.replace("T", " ") : ""}"`,
+    `mitre_primary:`,
+    mitreList,
   ];
 
   if (state.analystNotes.trim()) {
-    lines.push(`## Analyst Notes`, ``, state.analystNotes.trim(), ``);
+    lines.push(`analyst_notes: >`, `  ${state.analystNotes.trim()}`);
   }
 
   return (

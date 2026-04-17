@@ -24,6 +24,7 @@ import { IncidentTypeCard } from "@/components/sirt/IncidentTypeCard";
 import { SubTypeSelector } from "@/components/sirt/SubTypeSelector";
 import { AssetTypeDropdown } from "@/components/sirt/AssetTypeDropdown";
 import { ProgressTerminal } from "@/components/sirt/ProgressTerminal";
+import { SkillBundleCTA } from "@/components/sirt/SkillBundleCTA";
 import { INCIDENT_CATEGORIES } from "@/lib/constants/incident-types";
 import { ASSET_TYPES } from "@/lib/constants/asset-types";
 import { parseOrgStack, stackToolCount } from "@/lib/utils/stack-parser";
@@ -609,6 +610,9 @@ export default function SessionPage() {
                 </div>
               </div>
             </section>
+
+            {/* Skill bundle alternative */}
+            <SkillBundleCTA variant="inline" />
 
             {/* Error */}
             {generateError && (

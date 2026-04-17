@@ -2,7 +2,8 @@
 // Product name, tagline, two primary CTAs, footer.
 
 import Link from "next/link";
-import { ArrowRight, Terminal, ExternalLink, FileText } from "lucide-react";
+import { ArrowRight, Terminal, ExternalLink } from "lucide-react";
+import { SkillBundleCTA } from "@/components/sirt/SkillBundleCTA";
 import { AppShell } from "@/components/sirt/AppShell";
 import { Button } from "@/components/ui/button";
 
@@ -52,16 +53,8 @@ export default function LandingPage() {
           </div>
 
           {/* Skill bundle path */}
-          <div className="mt-5">
-            <Link href="/incident">
-              <Button
-                variant="ghost"
-                className="text-muted-ash hover:text-off-white font-mono text-xs h-9 px-4 w-full sm:w-auto border border-grid-line/50 hover:border-grid-line hover:bg-deep-slate"
-              >
-                <FileText size={13} className="mr-1.5" />
-                No API key? Generate Incident File for Claude Skill
-              </Button>
-            </Link>
+          <div className="mt-6 max-w-sm mx-auto w-full">
+            <SkillBundleCTA variant="card" />
           </div>
 
           {/* Quick-start hint */}
