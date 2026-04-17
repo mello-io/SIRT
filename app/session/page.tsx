@@ -28,6 +28,7 @@ import { SkillBundleCTA } from "@/components/sirt/SkillBundleCTA";
 import { INCIDENT_CATEGORIES } from "@/lib/constants/incident-types";
 import { ASSET_TYPES } from "@/lib/constants/asset-types";
 import { parseOrgStack, stackToolCount } from "@/lib/utils/stack-parser";
+import { track } from "@/lib/analytics/vercel";
 import { buildUserPrompt } from "@/lib/prompts/build-user-prompt";
 import { isVercelMode } from "@/lib/config";
 import { SYSTEM_PROMPT } from "@/lib/prompts/system-prompt";
@@ -256,11 +257,16 @@ export default function SessionPage() {
       };
 
       sessionStorage.setItem(SIRT_OUTPUT_KEY, JSON.stringify(output));
+      track("checklist_generated", {
+        incident_subtype_id: selectedSubType.id,
+        asset_type: assetTypeId,
+        provider: usedProvider,
+      });
       router.push("/output");
     } catch (err) {
-      setGenerateError(
-        err instanceof Error ? err.message : "Generation failed. Try again."
-      );
+      const message = err instanceof Error ? err.message : "Generation failed. Try again.";
+      track("generation_error", { provider, error_type: err instanceof Error ? err.name : "unknown" });
+      setGenerateError(message);
       setIsGenerating(false);
     }
   }
@@ -330,6 +336,7 @@ export default function SessionPage() {
                   type="file"
                   accept=".md"
                   className="sr-only"
+                  aria-label="Upload org-sec-stack.md"
                   onChange={handleFileInput}
                 />
               </div>

@@ -13,6 +13,7 @@ import {
 } from "@/lib/constants/incident-types";
 import { ASSET_TYPES } from "@/lib/constants/asset-types";
 import { downloadMarkdown } from "@/lib/utils/file-download";
+import { track } from "@/lib/analytics/vercel";
 
 const SEVERITIES = ["P1", "P2", "P3", "P4"] as const;
 type Severity = (typeof SEVERITIES)[number];
@@ -105,6 +106,10 @@ export function IncidentForm({ onFormChange }: IncidentFormProps) {
         .replace(/\s+/g, "-")
         .replace(/[^a-z0-9-]/g, "") ?? "incident";
     downloadMarkdown(lines.join("\n"), `incident-type-${slug}-${dateStr}.md`);
+    track("incident_file_generated", {
+      incident_subtype_id: subType?.id ?? "",
+      asset_type: state.assetTypeId,
+    });
     setDownloaded(true);
     setTimeout(() => setDownloaded(false), 3000);
   }

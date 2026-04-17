@@ -26,6 +26,7 @@ import {
   type ToolCategory,
 } from "@/lib/constants/tool-library";
 import { downloadMarkdown } from "@/lib/utils/file-download";
+import { track } from "@/lib/analytics/vercel";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -235,6 +236,7 @@ export default function SetupPage() {
     }
 
     downloadMarkdown(lines.join("\n"), "org-sec-stack.md");
+    track("stack_setup_completed", { tool_count: selectedIds.size + customTools.length });
     setGenerated(true);
   }
 

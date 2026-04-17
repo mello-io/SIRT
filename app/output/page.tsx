@@ -27,6 +27,7 @@ import { PhaseBlock } from "@/components/sirt/PhaseBlock";
 import { ToolQueryBlock } from "@/components/sirt/ToolQueryBlock";
 import { downloadMarkdown, buildOutputFilename } from "@/lib/utils/file-download";
 import { SIRT_OUTPUT_KEY, type SirtOutput } from "@/lib/types/session";
+import { track } from "@/lib/analytics/vercel";
 
 // ── Section splitter ──────────────────────────────────────────────────────────
 // Splits markdown into a preamble (before the first H2) and an array of
@@ -285,6 +286,7 @@ export default function OutputPage() {
 
   function handleDownload() {
     downloadMarkdown(output!.content, filename);
+    track("checklist_downloaded", { incident_subtype_id: output!.meta.incidentSubTypeId });
   }
 
   async function handleCopy() {

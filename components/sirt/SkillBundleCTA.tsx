@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Download, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SkillInstallModal } from "@/components/sirt/SkillInstallModal";
+import { track } from "@/lib/analytics/vercel";
 
 const GITHUB_RELEASE_URL = "https://github.com/mello-io/SIRT/releases/tag/skill-v1.0";
 
@@ -18,7 +19,12 @@ export function SkillBundleCTA({ variant = "inline" }: SkillBundleCTAProps) {
 
   const buttons = (
     <div className="flex flex-wrap gap-2">
-      <a href={GITHUB_RELEASE_URL} target="_blank" rel="noopener noreferrer">
+      <a
+        href={GITHUB_RELEASE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => track("skill_bundle_downloaded")}
+      >
         <Button
           size="sm"
           variant="outline"

@@ -130,6 +130,19 @@ export default function SettingsPage() {
             <SkillBundleCTA variant="inline" />
           </section>
 
+          {/* Privacy */}
+          <section className="bg-deep-slate border border-grid-line rounded p-5">
+            <h2 className="font-mono text-sm font-semibold text-off-white mb-3">
+              Analytics & Privacy
+            </h2>
+            <p className="text-xs text-muted-ash leading-relaxed">
+              S.I.R.T. uses Vercel Analytics for anonymous page visit tracking
+              and web vitals. No personal data, API keys, incident content, or
+              stack details are ever collected. Analytics are disabled in static
+              mode.
+            </p>
+          </section>
+
           {/* About */}
           <section className="bg-deep-slate border border-grid-line rounded p-5">
             <h2 className="font-mono text-sm font-semibold text-off-white mb-3">
