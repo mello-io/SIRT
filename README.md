@@ -1,9 +1,9 @@
 # S.I.R.T. - Security Incident Response Transcript
 
 > SOAR for humans. Comprehensive IR checklists, tailored to your exact security stack.
+> Current : v1.1
 
-
-**Live:** [sirt-five.vercel.app](https://sirt-five.vercel.app/)
+**Live:** [sirt-five.vercel.app](https://sirt-five.vercel.app/) | **Skill Bundle:** [Download v1.0](https://github.com/mello-io/SIRT/releases/tag/skill-v1.0)
 
 ---
 
@@ -21,6 +21,8 @@ S.I.R.T. does not ingest live data. It does not connect to production systems. I
 
 ## How It Works
 
+### Path A — API key (full web app)
+
 ```text
 01  Set up your stack      →   Select your security tools from 60+ options across 9 categories.
                                Export a portable org-sec-stack.md profile.
@@ -30,6 +32,19 @@ S.I.R.T. does not ingest live data. It does not connect to production systems. I
 
 03  Download checklist     →   Get a phase-structured, MITRE-tagged, tool-specific IR checklist
                                as a portable .md file, ready for the analyst or their SOC AI.
+```
+
+### Path B — Claude Skill (no API key required)
+
+```text
+01  Download skill bundle  →   Download SIRT-skill-bundle-v1.0.zip from GitHub Releases.
+                               Upload the 4 skill files to a Claude Pro/Team/Enterprise Project.
+
+02  Generate config files  →   Use the web app to generate your org-sec-stack.md and
+                               incident-type.md. No API key needed for this step.
+
+03  Run in Claude          →   Upload both files to your Claude Project and type:
+                               "Generate my IR checklist."
 ```
 
 ---
@@ -43,11 +58,14 @@ S.I.R.T. does not ingest live data. It does not connect to production systems. I
 | **MITRE ATT&CK tagged** | Every checklist includes technique references linking to attack.mitre.org |
 | **Multi-LLM** | Anthropic (Claude), OpenAI (GPT-4o), Google (Gemini), Mistral |
 | **BYOK** | Bring your own API key, proxied through Vercel Functions, never stored |
+| **Claude Skill** | No API key path - upload the skill bundle to a Claude Project and run locally |
+| **Incident Type Generator** | Generate a portable `incident-type.md` session file in under 60 seconds |
 | **Zero data retention** | Nothing persisted server-side. Org profile lives on your machine. Keys clear on tab close. |
 | **6 IR phases** | Initial Verification → Scope Assessment → Containment → Eradication → Recovery → Reporting |
 | **Decision points** | Minimum 3 explicit `⚠️ DECISION POINT` items per checklist |
 | **Tool query blocks** | Real, tool-specific syntax (SPL, KQL, YARA, and more) for every tool in your stack |
 | **Portable output** | Downloads as `SIRT-[incident]-[date].md`; readable offline, shareable, AI-ingestible |
+| **Audit folder** | Public `/audit` directory with security hardening documentation |
 
 ---
 
