@@ -115,7 +115,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-grid-line px-6 py-4 flex items-center justify-between text-[11px] font-mono text-muted-ash">
-        <span>S.I.R.T. v1.0</span>
+        <span>S.I.R.T. v1.1</span>
         <div className="flex items-center gap-4">
           <span className="hidden sm:inline">⌘D — download checklist</span>
           <a

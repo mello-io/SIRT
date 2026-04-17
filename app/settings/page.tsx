@@ -9,6 +9,7 @@ import { AppShell } from "@/components/sirt/AppShell";
 import { Button } from "@/components/ui/button";
 import { SkillBundleCTA } from "@/components/sirt/SkillBundleCTA";
 import { DEPLOY_MODE } from "@/lib/config";
+import { SIRT_API_KEY, SIRT_PROVIDER_KEY } from "@/lib/types/session";
 import type { Provider } from "@/lib/types/llm";
 
 const PROVIDER_LABELS: Record<Provider, string> = {
@@ -22,8 +23,8 @@ export default function SettingsPage() {
   const [cleared, setCleared] = useState(false);
 
   function clearApiKey() {
-    sessionStorage.removeItem("sirt_api_key");
-    sessionStorage.removeItem("sirt_provider");
+    sessionStorage.removeItem(SIRT_API_KEY);
+    sessionStorage.removeItem(SIRT_PROVIDER_KEY);
     setCleared(true);
     setTimeout(() => setCleared(false), 3000);
   }
@@ -151,7 +152,7 @@ export default function SettingsPage() {
             <dl className="space-y-2 text-xs font-mono">
               {[
                 ["Product", "S.I.R.T. — Security Incident Response Transcript"],
-                ["Version", "v1.0"],
+                ["Version", "v1.1"],
                 ["Incident types", "22 across 7 categories"],
                 ["Tool library", "60+ tools across 9 categories"],
               ].map(([label, value]) => (

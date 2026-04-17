@@ -25,7 +25,7 @@ export function AppShell({ children }: AppShellProps) {
             S.I.R.T.
           </span>
           <span className="text-[11px] font-mono text-muted-ash border border-grid-line rounded px-1.5 py-0.5 leading-none">
-            v1.0
+            v1.1
           </span>
         </Link>
 

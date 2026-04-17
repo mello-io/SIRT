@@ -1,4 +1,4 @@
-// S.I.R.T. System Prompt — v1.0
+// S.I.R.T. System Prompt — v1.1
 // Static across all providers and incident types.
 // Defines role, output format, quality standards, and the guide-don't-prescribe principle.
 
@@ -26,7 +26,7 @@ Every response MUST follow this exact structure in order. No deviations.
 > **Detection Time:** [ISO datetime or "Not specified"]
 > **Organisation:** [Org name]
 > **Generated:** [current UTC timestamp]
-> **Prompt Version:** v1.0
+> **Prompt Version:** v1.1
 
 ### 2. Title
 # SIRT: [Incident Sub-type Name] — [Org Name]
