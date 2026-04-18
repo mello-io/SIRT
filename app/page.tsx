@@ -2,7 +2,7 @@
 // Product name, tagline, two primary CTAs, footer.
 
 import Link from "next/link";
-import { ArrowRight, Terminal, ExternalLink } from "lucide-react";
+import { ArrowRight, Terminal } from "lucide-react";
 import { SkillBundleCTA } from "@/components/sirt/SkillBundleCTA";
 import { AppShell } from "@/components/sirt/AppShell";
 import { Button } from "@/components/ui/button";
@@ -114,23 +114,6 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-grid-line px-6 py-4 flex items-center justify-between text-[11px] font-mono text-muted-ash">
-        <span>S.I.R.T. v1.1</span>
-        <div className="flex items-center gap-4">
-          <span className="hidden sm:inline">⌘D — download checklist</span>
-          <a
-            href="https://github.com/mello-io/SIRT"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 hover:text-off-white transition-colors"
-            aria-label="GitHub repository"
-          >
-            <ExternalLink size={13} />
-            GitHub
-          </a>
-        </div>
-      </footer>
     </AppShell>
   );
 }
