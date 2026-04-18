@@ -36,7 +36,7 @@ export function AppShell({ children }: AppShellProps) {
             aria-label="Incident Type Generator"
           >
             <FileText size={13} aria-hidden="true" />
-            <span className="hidden sm:inline">Generate File</span>
+            <span className="hidden sm:inline">Generate Incident File</span>
           </Link>
           <Link
             href="/settings"
