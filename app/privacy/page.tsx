@@ -83,9 +83,10 @@ export default function PrivacyPage() {
 
           <Section title="Your Files">
             <p>
-              Files you upload to S.I.R.T. (org-sec-stack.md, incident-type.md) are processed in
-              your browser or passed through a serverless function to your LLM provider. They are
-              not stored by S.I.R.T. at any point.
+              Files you upload to S.I.R.T. (org-sec-stack.md, incident-type.md) are processed
+              entirely in your browser. A structured prompt derived from that data is sent to your
+              LLM provider. Your original files are not stored by S.I.R.T. at any point and are
+              never transmitted to any server.
             </p>
           </Section>
 
