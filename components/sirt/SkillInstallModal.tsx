@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 import { X, Download, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -20,7 +21,7 @@ const STEPS = [
   {
     n: "03",
     title: "Generate your config files",
-    body: "Come back here to generate your org-sec-stack.md (Stack Setup) and incident-type.md (Incident Type Generator). These are your session inputs.",
+    body: null,
   },
   {
     n: "04",
@@ -64,7 +65,7 @@ export function SkillInstallModal({ open, onClose }: SkillInstallModalProps) {
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
-      aria-label="S.I.R.T. Skill Bundle — Install Guide"
+      aria-label="S.I.R.T. Skill Bundle — Setup Guide"
     >
       {/* Backdrop */}
       <div
@@ -77,18 +78,18 @@ export function SkillInstallModal({ open, onClose }: SkillInstallModalProps) {
       <div className="relative w-full max-w-lg max-h-[85vh] overflow-y-auto bg-deep-slate border border-grid-line rounded-lg shadow-2xl">
         {/* Header */}
         <div className="sticky top-0 bg-deep-slate border-b border-grid-line px-5 py-4 flex items-center justify-between">
-          <div>
-            <p className="text-[10px] font-mono text-muted-ash uppercase tracking-widest mb-0.5">
+          <div className="flex-1 text-center">
+            <p className="text-[10px] font-mono text-muted-ash uppercase tracking-widest">
               S.I.R.T. Claude Skill
             </p>
-            <h2 className="font-mono font-bold text-sm text-off-white">
-              Install Guide
+            <h2 className="font-mono font-bold text-sm text-off-white text-left mt-2">
+              Setup Guide
             </h2>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="text-muted-ash hover:text-off-white transition-colors p-1 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal-green"
+            className="text-muted-ash hover:text-off-white transition-colors p-1 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal-green ml-4 shrink-0"
             aria-label="Close"
           >
             <X size={16} />
@@ -107,9 +108,25 @@ export function SkillInstallModal({ open, onClose }: SkillInstallModalProps) {
                   <p className="font-mono text-sm text-off-white font-semibold mb-1">
                     {step.title}
                   </p>
-                  <p className="text-xs text-muted-ash leading-relaxed">
-                    {step.body}
-                  </p>
+                  {step.n === "03" ? (
+                    <p className="text-xs text-muted-ash leading-relaxed">
+                      Come back here to generate your{" "}
+                      <code className="text-[#6B7A8D]">org-sec-stack.md</code> at{" "}
+                      <Link href="/setup" className="text-[#00FF88] hover:underline">
+                        /setup
+                      </Link>{" "}
+                      and your{" "}
+                      <code className="text-[#6B7A8D]">incident-type.md</code> at{" "}
+                      <Link href="/incident" className="text-[#00FF88] hover:underline">
+                        /incident
+                      </Link>
+                      . These are your session inputs.
+                    </p>
+                  ) : (
+                    <p className="text-xs text-muted-ash leading-relaxed">
+                      {step.body}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}

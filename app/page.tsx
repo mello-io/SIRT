@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 export default function LandingPage() {
   return (
     <AppShell>
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-16 text-center relative">
+      <div className="hero-grid flex-1 flex flex-col items-center justify-center px-6 py-16 text-center relative">
         {/* Hero block */}
         <div className="max-w-xl w-full">
           <div className="mb-8">
@@ -19,21 +19,21 @@ export default function LandingPage() {
             </span>
           </div>
 
-          <h1 className="font-mono font-bold text-5xl text-off-white mb-4 tracking-tight leading-none">
+          <h1 className="hero-fade-1 font-mono font-bold text-5xl text-off-white mb-4 tracking-tight leading-none">
             S.I.R.T.
           </h1>
 
-          <p className="font-mono text-lg text-signal-green mb-3 tracking-tight">
+          <p className="hero-fade-2 font-mono text-lg text-signal-green mb-3 tracking-tight">
             SOAR for humans.
           </p>
 
-          <p className="text-muted-ash text-sm leading-relaxed mb-10 max-w-md mx-auto">
+          <p className="hero-fade-2 text-muted-ash text-sm leading-relaxed mb-10 max-w-md mx-auto">
             Comprehensive IR checklists tailored to your exact security stack.
             Stack-aware. MITRE-tagged. Analyst-ready.
           </p>
 
           {/* Primary CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="hero-fade-3 flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/setup">
               <Button className="bg-signal-green text-void hover:bg-signal-green/90 font-mono font-semibold text-sm px-6 h-11 w-full sm:w-auto">
                 Set Up Org Stack
@@ -52,13 +52,8 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          {/* Skill bundle path */}
-          <div className="mt-6 max-w-sm mx-auto w-full">
-            <SkillBundleCTA variant="card" />
-          </div>
-
           {/* Quick-start hint */}
-          <p className="mt-4 text-xs text-muted-ash font-mono">
+          <p className="hero-fade-3 mt-4 text-xs text-muted-ash font-mono">
             Already have an{" "}
             <code className="text-off-white bg-iron px-1 py-0.5 rounded text-[11px]">
               org-sec-stack.md
@@ -71,10 +66,11 @@ export default function LandingPage() {
               Load it directly →
             </Link>
           </p>
+
         </div>
 
         {/* How it works */}
-        <div className="mt-20 max-w-2xl w-full">
+        <div className="mt-12 max-w-2xl w-full">
           <p className="text-[11px] font-mono text-muted-ash uppercase tracking-widest mb-6">
             How it works
           </p>
@@ -110,6 +106,11 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* No API key */}
+        <div className="mt-10 max-w-sm w-full">
+          <SkillBundleCTA variant="card" />
         </div>
       </div>
 

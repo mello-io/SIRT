@@ -47,6 +47,7 @@ export function ToolCard({ tool, isSelected, onToggle }: ToolCardProps) {
             className={`text-xs font-mono font-semibold leading-tight truncate transition-colors ${
               isSelected ? "text-off-white" : "text-off-white/80 group-hover:text-off-white"
             }`}
+            title={tool.name}
           >
             {tool.name}
           </p>

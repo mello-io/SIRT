@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Download, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SkillInstallModal } from "@/components/sirt/SkillInstallModal";
@@ -56,16 +57,26 @@ export function SkillBundleCTA({ variant = "inline" }: SkillBundleCTAProps) {
           <p className="font-mono font-semibold text-sm text-off-white mb-1">
             Use the S.I.R.T. Claude Skill
           </p>
-          <p className="text-xs text-muted-ash leading-relaxed mb-4">
+          <p className="text-xs text-muted-ash leading-relaxed mb-2">
             Upload S.I.R.T. to your Claude Pro, Team, or Enterprise project. No
             API cost. No setup.
+          </p>
+          <p className="text-xs text-muted-ash mb-4">
+            <Link href="/incident" className="text-signal-green hover:underline font-medium">
+              Generate incident-type.md for Claude →
+            </Link>
           </p>
           {buttons}
         </div>
       ) : (
         <div className="pt-4 border-t border-grid-line">
-          <p className="text-xs font-mono text-muted-ash mb-3">
+          <p className="text-xs font-mono text-muted-ash mb-1">
             No API key? Use the Claude Skill instead.
+          </p>
+          <p className="text-xs font-mono text-muted-ash mb-3">
+            <Link href="/incident" className="text-signal-green hover:underline font-medium">
+              Generate incident-type.md for Claude →
+            </Link>
           </p>
           {buttons}
         </div>

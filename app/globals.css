@@ -10,6 +10,76 @@
   }
 }
 
+/* ── S.I.R.T. Custom Scrollbar ────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111820;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00FF88;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc6e;
+}
+
+::-webkit-scrollbar-corner {
+  background: #111820;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00FF88 #111820;
+}
+
+/* ── Hero Grid + Animations ───────────────────────────────── */
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(0, 255, 136, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-1 {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.hero-fade-2 {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.25s;
+  opacity: 0;
+}
+
+.hero-fade-3 {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
 @layer base {
   /* S.I.R.T. is always dark — no light theme. */
   :root {

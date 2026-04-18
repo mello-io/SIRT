@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "S.I.R.T. — Security Incident Response Transcript",
   description:
     "SOAR for humans. Comprehensive IR checklists, tailored to your exact security stack.",
+  icons: {
+    icon: "/sirt-logo.png",
+  },
 };
 
 export default function RootLayout({
