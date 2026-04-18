@@ -52,9 +52,16 @@ database.
 
 - All communication between the browser and Vercel Functions is over HTTPS (TLS 1.2+)
 - All communication between Vercel Functions and LLM provider APIs is over HTTPS
-- The key is never transmitted in a URL query string or URL fragment — only in the
-  request body (POST) or Authorization header
+- The key is never transmitted in a URL query string or URL fragment — it is passed
+  in a request header for all providers (see table below)
 - Vercel enforces HTTPS on all deployments — HTTP requests are redirected automatically
+
+| Provider | Header Used | Notes |
+|---|---|---|
+| Anthropic | `x-api-key` | Anthropic's required header |
+| OpenAI | `Authorization: Bearer` | Standard OAuth bearer token |
+| Google | `x-goog-api-key` | Header-based auth; URL query param not used |
+| Mistral | `Authorization: Bearer` | Standard OAuth bearer token |
 
 ---
 

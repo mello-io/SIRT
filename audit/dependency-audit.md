@@ -16,18 +16,19 @@ package must justify its presence. Dependencies are reviewed at each version rel
 
 | Package | Version | Purpose | Publisher | Trust Notes |
 |---|---|---|---|---|
-| `next` | 14.x | App framework | Vercel | Industry standard, actively maintained |
-| `react` | 18.x | UI library | Meta | Industry standard |
-| `react-dom` | 18.x | DOM rendering | Meta | Industry standard |
-| `typescript` | 5.x | Type safety | Microsoft | Industry standard |
-| `tailwindcss` | 3.x | Styling | Tailwind Labs | Widely used, minimal attack surface |
-| `react-markdown` | 9.x | Markdown rendering in Output view | Unified collective | Well-audited, large ecosystem |
-| `gray-matter` | 4.x | YAML/frontmatter parsing (org-sec-stack.md) | Jon Schlinkert | Stable, widely used |
-| `date-fns` | 3.x | Date formatting for output file names | date-fns team | No network calls, pure functions |
-| `lucide-react` | 0.x | Icon library | Lucide | SVG icons only, no network calls |
-| `clsx` | 2.x | Conditional class names | Luke Edwards | 100-line utility, auditable |
-| `@vercel/analytics` | latest | Anonymous usage analytics | Vercel | First-party Vercel package |
-| `@vercel/speed-insights` | latest | Web vitals tracking | Vercel | First-party Vercel package |
+| `next` | 14.2.35 | App framework | Vercel | Industry standard — see vulnerability note below |
+| `react` | 18.3.1 | UI library | Meta | Industry standard |
+| `react-dom` | 18.3.1 | DOM rendering | Meta | Industry standard |
+| `typescript` | 5.9.3 | Type safety | Microsoft | Industry standard |
+| `tailwindcss` | 3.4.19 | Styling | Tailwind Labs | Widely used, minimal attack surface |
+| `react-markdown` | 10.1.0 | Markdown rendering in Output view | Unified collective | Well-audited, large ecosystem |
+| `gray-matter` | 4.0.3 | YAML/frontmatter parsing (org-sec-stack.md) | Jon Schlinkert | Stable, widely used |
+| `date-fns` | 4.1.0 | Date formatting for output file names | date-fns team | No network calls, pure functions |
+| `lucide-react` | 1.8.0 | Icon library | Lucide | SVG icons only, no network calls |
+| `clsx` | 2.1.1 | Conditional class names | Luke Edwards | 100-line utility, auditable |
+| `@vercel/analytics` | 2.0.1 | Anonymous usage analytics | Vercel | First-party Vercel package |
+| `@vercel/speed-insights` | 2.0.0 | Web vitals tracking | Vercel | First-party Vercel package |
+| `remark-gfm` | 4.0.1 | GitHub-flavoured Markdown in checklist output | Unified collective | Pure text transformation |
 
 ### shadcn/ui components
 shadcn/ui is not a traditional npm package — it copies component source code
@@ -66,6 +67,27 @@ dependency. They are based on Radix UI primitives.
 | Any auth library | No auth in v1 |
 | Any file upload library | Browser File API is sufficient |
 | `dotenv` | Next.js handles env vars natively |
+
+---
+
+## Known Vulnerability Status — April 2026
+
+`npm audit` reports 5 findings against `next@14.2.35`. Context:
+
+| CVE | Severity | Applies to SIRT? |
+|---|---|---|
+| GHSA-9g9p-9gw9-jx7f | High | No — self-hosted Image Optimizer only; SIRT uses Vercel |
+| GHSA-3x4c-7xq6-9pq8 | High | No — self-hosted disk cache only; SIRT uses Vercel |
+| GHSA-ggv3-7p47-pfv8 | High | No — requires `rewrites` config; SIRT has none |
+| GHSA-h25m-26qc-wcjf | High | Low risk — requires insecure RSC patterns not present in SIRT |
+| GHSA-q4gf-8mx6-v5v3 | High | Low risk — DoS via Server Components; mitigated by Vercel infra |
+
+All fixes require upgrading to `next@16` (breaking change from 14.x). A Next.js
+major version upgrade is tracked as a separate post-launch task and will be tested
+in isolation before merging to main.
+
+The `glob` CLI injection (transitive via `eslint-config-next`) is dev-only and
+has no runtime impact.
 
 ---
 

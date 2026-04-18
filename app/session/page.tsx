@@ -130,6 +130,10 @@ export default function SessionPage() {
       setParseError("Please upload a .md file (org-sec-stack.md).");
       return;
     }
+    if (file.size > 1_048_576) {
+      setParseError("File is too large (max 1 MB). Please upload a valid org-sec-stack.md.");
+      return;
+    }
     const reader = new FileReader();
     reader.onload = (e) => {
       const content = e.target?.result as string;

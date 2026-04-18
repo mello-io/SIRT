@@ -84,11 +84,14 @@ async function callOpenAI(req: LLMRequest): Promise<LLMResponse> {
 // ── Google Gemini ─────────────────────────────────────────────────────────────
 
 async function callGoogle(req: LLMRequest): Promise<LLMResponse> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${req.apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent`;
 
   const response = await fetch(url, {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: {
+      "content-type": "application/json",
+      "x-goog-api-key": req.apiKey,
+    },
     body: JSON.stringify({
       contents: [{ role: "user", parts: [{ text: req.userPrompt }] }],
       systemInstruction: { parts: [{ text: req.systemPrompt }] },

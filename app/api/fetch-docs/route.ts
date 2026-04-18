@@ -33,18 +33,37 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Missing docsUrl" }, { status: 400, headers: HEADERS });
   }
 
-  // Validate URL
+  // Validate URL — https only, no private/loopback targets
   let parsedUrl: URL;
   try {
     parsedUrl = new URL(docsUrl);
-    if (!["http:", "https:"].includes(parsedUrl.protocol)) {
+    if (parsedUrl.protocol !== "https:") {
       return NextResponse.json(
-        { error: "Only http/https URLs are supported" },
+        { error: "Only https:// URLs are supported" },
         { status: 400, headers: HEADERS }
       );
     }
   } catch {
     return NextResponse.json({ error: "Invalid URL" }, { status: 400, headers: HEADERS });
+  }
+
+  // SSRF guard — block private IP ranges and localhost
+  const hostname = parsedUrl.hostname;
+  const privatePatterns = [
+    /^localhost$/i,
+    /^127\./,
+    /^10\./,
+    /^192\.168\./,
+    /^172\.(1[6-9]|2\d|3[01])\./,
+    /^::1$/,
+    /^0\.0\.0\.0$/,
+    /^169\.254\./,
+  ];
+  if (privatePatterns.some((re) => re.test(hostname))) {
+    return NextResponse.json(
+      { error: "Private or loopback addresses are not permitted" },
+      { status: 400, headers: HEADERS }
+    );
   }
 
   // Fetch with timeout
