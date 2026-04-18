@@ -25,6 +25,15 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Root layout component that sets global HTML attributes and renders the application content.
+ *
+ * Applies the `dark` theme and font CSS variables to the `<html>` element, renders `children` inside
+ * the `<body>`, and mounts analytics integrations.
+ *
+ * @param children - The page content to render within the root layout's `<body>`.
+ * @returns The root HTML structure for the application, including analytics components.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

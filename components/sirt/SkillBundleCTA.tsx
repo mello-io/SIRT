@@ -15,6 +15,16 @@ interface SkillBundleCTAProps {
   variant?: "card" | "inline";
 }
 
+/**
+ * Render a call-to-action that lets users download the Skill Bundle or open the installation modal.
+ *
+ * Renders two primary actions ("Download Skill Bundle" and "Learn How") and conditionally presents
+ * either a bordered card layout or a compact inline layout based on `variant`. Also mounts the
+ * SkillInstallModal controlled by internal state.
+ *
+ * @param variant - Layout variant: `"card"` shows a bordered/padded card with extended copy and links; `"inline"` shows a compact, inline section (default: `"inline"`).
+ * @returns The rendered CTA React element.
+ */
 export function SkillBundleCTA({ variant = "inline" }: SkillBundleCTAProps) {
   const [modalOpen, setModalOpen] = useState(false);
 

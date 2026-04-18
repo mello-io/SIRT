@@ -8,6 +8,16 @@ interface AppShellProps {
   children: React.ReactNode;
 }
 
+/**
+ * Render the application shell with a top navigation bar and main content area.
+ *
+ * The component provides a consistent layout containing a banner-style navigation
+ * (brand link, version badge, links to Incident and Settings) and a main region
+ * that hosts the page-specific content.
+ *
+ * @param children - The screen-specific content to render beneath the navigation.
+ * @returns The app shell element containing the top nav and the `children` content.
+ */
 export function AppShell({ children }: AppShellProps) {
   return (
     <div className="min-h-screen flex flex-col bg-void">
