@@ -23,20 +23,34 @@ provisions and renews TLS certificates. HTTP requests are automatically redirect
 to HTTPS. TLS version minimum is TLS 1.2.
 
 ### Headers
-Vercel sets the following security-relevant headers by default:
+S.I.R.T. sets the following security headers via `next.config.mjs` on all routes:
 
 | Header | Value | Purpose |
 |---|---|---|
-| `Strict-Transport-Security` | `max-age=63072000` | Forces HTTPS for 2 years |
+| `Content-Security-Policy` | See below | Restricts resource loading to known-safe origins |
+| `Strict-Transport-Security` | `max-age=63072000; includeSubDomains; preload` | Forces HTTPS for 2 years |
 | `X-Content-Type-Options` | `nosniff` | Prevents MIME-type sniffing |
-| `X-Frame-Options` | `SAMEORIGIN` | Prevents clickjacking |
-| `X-XSS-Protection` | `1; mode=block` | Legacy XSS filter |
+| `X-Frame-Options` | `DENY` | Prevents clickjacking |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` | Limits referrer data to same-origin |
+| `Permissions-Policy` | `camera=(), microphone=(), geolocation=()` | Disables unused browser APIs |
 
-Custom response headers added by S.I.R.T.:
+Custom API response header added by S.I.R.T.:
 
 | Header | Value | Purpose |
 |---|---|---|
 | `X-SIRT-Version` | `1.1` | Version identification for debugging |
+
+**Content-Security-Policy** (applied via `next.config.mjs`):
+```
+default-src 'self';
+script-src 'self' 'unsafe-inline' 'unsafe-eval' va.vercel-scripts.com;
+style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+font-src 'self' fonts.gstatic.com;
+connect-src 'self' api.anthropic.com api.openai.com generativelanguage.googleapis.com api.mistral.ai va.vercel-scripts.com vitals.vercel-insights.com;
+img-src 'self' data: blob:;
+frame-ancestors 'none'
+```
+`'unsafe-inline'` and `'unsafe-eval'` are required by Next.js App Router. These are standard for Next.js deployments without a nonce-based CSP.
 
 ### Serverless Function Isolation
 Each Vercel Function (`/api/generate`, `/api/fetch-docs`, `/api/provider`) runs

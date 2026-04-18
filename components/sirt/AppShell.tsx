@@ -60,6 +60,31 @@ export function AppShell({ children }: AppShellProps) {
 
       {/* Page content */}
       <main className="flex-1 flex flex-col">{children}</main>
+
+      {/* Global footer */}
+      <footer className="border-t border-grid-line px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] font-mono text-muted-ash shrink-0">
+        <span>S.I.R.T. v1.1</span>
+        <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-end">
+          <Link href="/privacy" className="hover:text-off-white transition-colors">Privacy Policy</Link>
+          <Link href="/terms" className="hover:text-off-white transition-colors">Terms of Service</Link>
+          <a
+            href="https://github.com/mello-io/SIRT/tree/main/audit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-off-white transition-colors"
+          >
+            Security Audit
+          </a>
+          <a
+            href="https://github.com/mello-io/SIRT"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-off-white transition-colors"
+          >
+            GitHub
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
