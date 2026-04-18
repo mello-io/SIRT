@@ -48,6 +48,17 @@ interface SkillInstallModalProps {
   onClose: () => void;
 }
 
+/**
+ * Render the S.I.R.T. Claude Skill setup guide modal when visible.
+ *
+ * Displays a centered dialog with keyboard (Escape) and backdrop close handling,
+ * step-by-step setup instructions (including inline links for step 03), trigger phrases,
+ * included bundle files, and download links.
+ *
+ * @param open - Whether the modal is visible.
+ * @param onClose - Callback invoked to close the modal (called on Escape, backdrop click, or close button).
+ * @returns The modal element when `open` is true, `null` otherwise.
+ */
 export function SkillInstallModal({ open, onClose }: SkillInstallModalProps) {
   useEffect(() => {
     if (!open) return;

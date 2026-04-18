@@ -7,6 +7,15 @@ import { SkillBundleCTA } from "@/components/sirt/SkillBundleCTA";
 import { AppShell } from "@/components/sirt/AppShell";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Renders the S.I.R.T. landing page within the application shell.
+ *
+ * The layout includes a hero section with title, taglines and primary CTAs, a responsive
+ * "How it works" three-step grid, a "No API key" skill bundle CTA card, and a footer
+ * showing the app version and a GitHub link.
+ *
+ * @returns The React element for the Landing page.
+ */
 export default function LandingPage() {
   return (
     <AppShell>

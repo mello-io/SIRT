@@ -10,6 +10,16 @@ interface ToolCardProps {
   onToggle: () => void;
 }
 
+/**
+ * Renders a selectable card button for a security tool showing an avatar, tool name, publisher, and selection indicator.
+ *
+ * The avatar displays up to two initials derived from `tool.publisher` (falls back to `"?"` when no initials can be derived). The button reflects selection state via visual styles and `aria-pressed`, and invokes `onToggle` when clicked.
+ *
+ * @param tool - The tool to display; `tool.name` is shown as the title/text and `tool.publisher` is used for the avatar and subtitle.
+ * @param isSelected - Whether the card is currently selected.
+ * @param onToggle - Click handler called when the button is pressed.
+ * @returns The JSX element representing the ToolCard.
+ */
 export function ToolCard({ tool, isSelected, onToggle }: ToolCardProps) {
   // Letter avatar from publisher initials
   const initials = tool.publisher
