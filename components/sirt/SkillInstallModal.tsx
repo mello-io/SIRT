@@ -65,7 +65,7 @@ export function SkillInstallModal({ open, onClose }: SkillInstallModalProps) {
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
-      aria-label="S.I.R.T. Skill Bundle — Install Guide"
+      aria-label="S.I.R.T. Skill Bundle — Setup Guide"
     >
       {/* Backdrop */}
       <div
