@@ -43,7 +43,7 @@ export function AppShell({ children }: AppShellProps) {
           <Link
             href="/incident"
             className="flex items-center gap-1.5 text-[11px] font-mono text-muted-ash hover:text-off-white transition-colors px-2 py-1 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal-green"
-            aria-label="Incident Type Generator"
+            aria-label="Generate Incident File"
           >
             <FileText size={13} aria-hidden="true" />
             <span className="hidden sm:inline">Generate Incident File</span>
