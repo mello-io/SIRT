@@ -112,7 +112,7 @@ export default function TermsPage() {
 
           <Section title="Intellectual Property">
             <p>
-              S.I.R.T.&apos;s source code is published under the MIT License at{" "}
+              S.I.R.T.&apos;s source code is published under the AGPL-3.0 License at{" "}
               <a
                 href="https://github.com/mello-io/SIRT"
                 target="_blank"

@@ -188,8 +188,8 @@ that fits your team.
 
 ## License
 
-MIT License — free to use, modify, and distribute.
-Attribution appreciated but not required.
+AGPL-3.0 License — free to use, modify, and distribute with source disclosure.
+Attribution required.
 
 ---
 

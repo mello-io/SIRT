@@ -1,6 +1,9 @@
+![S.I.R.T. Banner](./public/sirt-github.png)
+
 # S.I.R.T. - Security Incident Response Transcript
 
 > SOAR for humans. Comprehensive IR checklists, tailored to your exact security stack.
+
 > Current : v1.1
 
 **Live:** [sirt-five.vercel.app](https://sirt-five.vercel.app/) | **Skill Bundle:** [Download v1.0](https://github.com/mello-io/SIRT/releases/tag/skill-v1.0)
@@ -122,7 +125,9 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 
-MIT © [mello-io](https://github.com/mello-io)
+AGPL-3.0 © 2026 [mello-io](https://github.com/mello-io)
+
+S.I.R.T. is free software licensed under the GNU Affero General Public License v3.0. Any modified version deployed as a network service must make its source code publicly available. See [LICENSE](./LICENSE) for full terms.
 
 ---
 
