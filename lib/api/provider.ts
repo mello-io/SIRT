@@ -6,7 +6,7 @@
 // Provider map (TECH_STACK.md Section 4):
 //   anthropic → claude-sonnet-4-6    → api.anthropic.com/v1/messages
 //   openai    → gpt-4o               → api.openai.com/v1/chat/completions
-//   google    → gemini-1.5-pro       → generativelanguage.googleapis.com
+//   google    → gemini-2.5-flash      → generativelanguage.googleapis.com
 //   mistral   → mistral-large-latest → api.mistral.ai/v1/chat/completions
 
 import type { LLMRequest, LLMResponse } from "@/lib/types/llm";
@@ -84,7 +84,7 @@ async function callOpenAI(req: LLMRequest): Promise<LLMResponse> {
 // ── Google Gemini ─────────────────────────────────────────────────────────────
 
 async function callGoogle(req: LLMRequest): Promise<LLMResponse> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
 
   const response = await fetch(url, {
     method: "POST",

@@ -14,7 +14,7 @@ export async function GET() {
       models: {
         anthropic: "claude-sonnet-4-6",
         openai: "gpt-4o",
-        google: "gemini-2.5-pro",
+        google: "gemini-2.5-flash",
         mistral: "mistral-large-latest",
       },
       toolLibraryCount: TOOL_LIBRARY.length,

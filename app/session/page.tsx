@@ -91,7 +91,7 @@ function StepIndicator({ current }: { current: 1 | 2 }) {
 const PROVIDERS: { id: Provider; label: string }[] = [
   { id: "anthropic", label: "Anthropic (claude-sonnet-4-6)" },
   { id: "openai", label: "OpenAI (gpt-4o)" },
-  { id: "google", label: "Google (gemini-1.5-pro)" },
+  { id: "google", label: "Google (gemini-2.5-flash)" },
   { id: "mistral", label: "Mistral (mistral-large-latest)" },
 ];
 

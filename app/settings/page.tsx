@@ -15,7 +15,7 @@ import type { Provider } from "@/lib/types/llm";
 const PROVIDER_LABELS: Record<Provider, string> = {
   anthropic: "Anthropic (claude-sonnet-4-6)",
   openai: "OpenAI (gpt-4o)",
-  google: "Google (gemini-1.5-pro)",
+  google: "Google (gemini-2.5-flash)",
   mistral: "Mistral (mistral-large-latest)",
 };
 
