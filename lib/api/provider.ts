@@ -84,7 +84,7 @@ async function callOpenAI(req: LLMRequest): Promise<LLMResponse> {
 // ── Google Gemini ─────────────────────────────────────────────────────────────
 
 async function callGoogle(req: LLMRequest): Promise<LLMResponse> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent`;
 
   const response = await fetch(url, {
     method: "POST",
