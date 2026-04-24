@@ -36,10 +36,22 @@ export default function LandingPage() {
             SOAR for humans.
           </p>
 
-          <p className="hero-fade-2 text-muted-ash text-sm leading-relaxed mb-10 max-w-md mx-auto">
+          <p className="hero-fade-2 text-muted-ash text-sm leading-relaxed mb-8 max-w-md mx-auto">
             Comprehensive IR checklists tailored to your exact security stack.
             Stack-aware. MITRE-tagged. Analyst-ready.
           </p>
+
+          {/* Product ad */}
+          <div className="hero-fade-2 mb-8 rounded-lg overflow-hidden border border-grid-line max-w-xl mx-auto">
+            <video
+              src="/SIRT-Ad.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto"
+            />
+          </div>
 
           {/* Primary CTAs */}
           <div className="hero-fade-3 flex flex-col sm:flex-row gap-3 justify-center">
@@ -53,7 +65,7 @@ export default function LandingPage() {
             <Link href="/session">
               <Button
                 variant="outline"
-                className="border-grid-line bg-transparent text-off-white hover:bg-deep-slate font-mono text-sm px-6 h-11 w-full sm:w-auto"
+                className="border-2 !border-incident-red bg-transparent text-off-white hover:bg-incident-red/10 font-mono text-sm px-6 h-11 w-full sm:w-auto"
               >
                 Start Incident Session
                 <Terminal size={15} className="ml-2" />

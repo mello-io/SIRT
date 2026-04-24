@@ -2,7 +2,7 @@
 // Top nav bar present on all screens. Server component — no client interactivity.
 
 import Link from "next/link";
-import { Settings, FileText } from "lucide-react";
+import { Settings, FileText, BookOpen } from "lucide-react";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -41,8 +41,16 @@ export function AppShell({ children }: AppShellProps) {
 
         <div className="flex items-center gap-1">
           <Link
-            href="/incident"
+            href="/how-to"
             className="flex items-center gap-1.5 text-[11px] font-mono text-muted-ash hover:text-off-white transition-colors px-2 py-1 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal-green"
+            aria-label="How to use SIRT"
+          >
+            <BookOpen size={13} aria-hidden="true" />
+            <span className="hidden sm:inline">How to use SIRT</span>
+          </Link>
+          <Link
+            href="/incident"
+            className="flex items-center gap-1.5 text-[11px] font-mono text-incident-red hover:text-incident-red/80 transition-colors px-2 py-1 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-incident-red"
             aria-label="Generate Incident File"
           >
             <FileText size={13} aria-hidden="true" />
@@ -59,12 +67,13 @@ export function AppShell({ children }: AppShellProps) {
       </nav>
 
       {/* Page content */}
-      <main className="flex-1 flex flex-col">{children}</main>
+      <main className="flex-1 flex flex-col hero-grid">{children}</main>
 
       {/* Global footer */}
-      <footer className="border-t border-grid-line px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] font-mono text-muted-ash shrink-0">
+      <footer className="border-t border-grid-line px-6 py-4 grid grid-cols-3 items-center text-[11px] font-mono text-muted-ash shrink-0">
         <span>S.I.R.T. v1.1</span>
-        <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-end">
+        <span className="text-center">© 2026 mello-io</span>
+        <div className="flex items-center gap-4 flex-wrap justify-end">
           <Link href="/privacy" className="hover:text-off-white transition-colors">Privacy Policy</Link>
           <Link href="/terms" className="hover:text-off-white transition-colors">Terms of Service</Link>
           <a
