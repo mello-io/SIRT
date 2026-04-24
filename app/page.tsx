@@ -135,6 +135,41 @@ export default function LandingPage() {
         </div>
       </div>
 
+      {/* Badges row */}
+      <div className="w-full flex flex-wrap justify-end items-center gap-3 px-6 pb-6">
+
+        {/* YouTube playlist badge */}
+        <a
+          href="https://www.youtube.com/playlist?list=PLogCwpZtU7OG3tXrWwxC2AW5cGzkreHhM"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center h-[54px] w-[250px] pl-3 pr-4 rounded-md border border-grid-line bg-deep-slate hover:bg-iron transition-colors font-mono text-off-white no-underline"
+        >
+          {/* YouTube logo mark */}
+          <svg width="38" height="27" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="28" height="20" rx="4" fill="#FF0000"/>
+            <polygon points="11,5 11,15 20,10" fill="white"/>
+          </svg>
+          <span className="flex-1 text-[16px] text-muted-ash text-center">Watch on</span>
+          <span className="text-[17px] font-bold text-off-white">YouTube</span>
+        </a>
+
+        {/* Product Hunt badge */}
+        <a
+          href="https://www.producthunt.com/products/security-incident-response-transcript?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-security-incident-response-transcript"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            alt="Security Incident Response Transcript - SIRT makes tool-specific IR checklists to assist SOC analyst | Product Hunt"
+            width={250}
+            height={54}
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1131197&theme=dark&t=1777006761044"
+          />
+        </a>
+
+      </div>
+
     </AppShell>
   );
 }

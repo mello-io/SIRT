@@ -14,7 +14,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
       "font-src 'self' fonts.gstatic.com",
       "connect-src 'self' api.anthropic.com api.openai.com generativelanguage.googleapis.com api.mistral.ai va.vercel-scripts.com vitals.vercel-insights.com",
-      "img-src 'self' data: blob:",
+      "img-src 'self' data: blob: api.producthunt.com",
       "frame-ancestors 'none'",
     ].join("; "),
   },
